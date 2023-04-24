@@ -2,7 +2,11 @@ import { createRouter, createWebHistory } from "vue-router";
 import userRoutes from "@users/router";
 
 const routes = [
-  // your routes here
+  {
+    path: "/",
+    name: "Overview",
+    component: () => import("@/Views/Overview.vue"),
+  },
   ...userRoutes,
 ];
 

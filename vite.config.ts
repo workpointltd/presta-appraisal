@@ -11,4 +11,7 @@ export default defineConfig({
       {find: '@users', replacement: '/src/modules/users'},
     ],
   },
+  server:{
+    port:4040
+  }
 })
