@@ -6,7 +6,7 @@ defineProps<{
 
 <template>
   <section
-    class="space-y-3 rounded border border-light-gray-03 bg-white px-6 py-5"
+    class="w-full space-y-3 rounded border border-light-gray-03 bg-white px-6 py-5"
   >
     <div>
       <h1 class="text-sm text-dark-gray-04">{{ cardInfo.title }}</h1>
@@ -17,7 +17,7 @@ defineProps<{
     </div>
 
     <div class="flex justify-between">
-      <h3 class="light-gray-04 text-xs">Last {{ cardInfo.days }} Days</h3>
+      <h3 class="text-xs text-light-gray-04">Last {{ cardInfo.days }} Days</h3>
       <h3
         class="text-xs text-green-dark"
         v-if="cardInfo.growth"

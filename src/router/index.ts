@@ -1,14 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 import userRoutes from "@users/router";
+import overviewRoutes from "@/modules/overview/router";
+import requestsRouter from "@/modules/requests/router";
 
-const routes = [
-  {
-    path: "/",
-    name: "Overview",
-    component: () => import("@/Views/Overview.vue"),
-  },
-  ...userRoutes,
-];
+const routes = [...userRoutes, ...overviewRoutes, ...requestsRouter];
 
 const router = createRouter({
   history: createWebHistory(),

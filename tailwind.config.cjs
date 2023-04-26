@@ -25,6 +25,7 @@ export default {
         "green-light": "#DFFFEF",
         "red-dark": "#D90000",
         "red-light": "#FFE6E6",
+        "warning-medium" : "#FB6B27"
       },
       fontFamily: {
         roboto: ["Roboto", "sans-serif"],

@@ -4,3 +4,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .card-div {
+        @apply w-full rounded bg-white px-6 py-9;
+        min-height: 380px;
+    }
+    .card-div-data {
+        @apply mt-10 w-11/12 text-xs text-dark-shade-01;
+    }
+    .btn {
+        @apply flex space-x-2 rounded border border-light-gray-03 bg-white px-4 py-1 text-xs
+    }
+}

@@ -5,13 +5,12 @@ import TopNavBar from "@components/TopNavBar.vue";
 
 <template>
   <div class="flex">
-    <div class="w-1/6 md:block">
+    <div class="hidden w-1/6 md:block">
       <SideNavBar />
     </div>
     <div class="flex-1">
       <TopNavBar />
-
-      <main>
+      <main class="px-4">
         <router-view> </router-view>
       </main>
     </div>

@@ -3,7 +3,7 @@ import { Bars3Icon } from "@heroicons/vue/24/solid";
 </script>
 
 <template>
-  <section class="border border-light-gray-02 bg-white">
+  <section class="w-full border-b border-b-light-gray-02 bg-white">
     <div class="flex justify-between py-1 pl-4 pr-7">
       <div class="text-dark-gray-01">
         <Bars3Icon class="h-5 w-5" />

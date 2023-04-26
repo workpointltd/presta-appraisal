@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ChevronDownIcon, EllipsisVerticalIcon } from "@heroicons/vue/24/solid";
-import Cards from "@components/Overview/Cards.vue";
+import Cards from "@/modules/overview/components/Overview/Cards.vue";
 
 const cardsInfo = [
   {
@@ -24,7 +24,7 @@ const cardsInfo = [
 </script>
 
 <template>
-  <section class="space-y-5 px-4 py-5">
+  <section class="space-y-5 py-5">
     <div class="flex justify-between">
       <div>
         <h1 class="text-lg text-dark-shade-01">Appraisal Overview</h1>
@@ -49,7 +49,6 @@ const cardsInfo = [
     <div class="flex space-x-4">
       <Cards
         v-for="(cardInfo, idx) in cardsInfo"
-        class="w-1/3"
         :cardInfo="cardInfo"
         :key="idx"
       />

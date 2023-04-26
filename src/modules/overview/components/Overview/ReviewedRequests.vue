@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import Table from "@components/Table.vue";
+import RequestTable from "@/modules/overview/components/RequestTable.vue";
+
 const tableData = {
-  title: "My Recent Requests",
-  desc: "A List of your Recent Appraisal Requests",
-  method: "Actions",
+  title: "My Reviewed Requests",
+  desc: "A List of your Reviewed Appraisal Requests",
+  method: "Status",
   data: [
     {
       requestID: "#100",
@@ -12,6 +14,7 @@ const tableData = {
       description: { product: "Loan Product", amount: "1,000 KES" },
       step: "Approver Level 1",
       applicant: { name: "First & Last Name", phoneNumber: "254 710 234 524" },
+      status: "Approved",
     },
     {
       requestID: "#101",
@@ -20,11 +23,12 @@ const tableData = {
       description: { product: "Capital Withdrawal", amount: "10,000 KES" },
       step: "Approver Level 2",
       applicant: { name: "First & Last Name", phoneNumber: "254 710 234 524" },
+      status: "Declined",
     },
   ],
 };
 </script>
 
 <template>
-  <Table :tableData="tableData" />
+  <RequestTable :tableData="tableData" />
 </template>
