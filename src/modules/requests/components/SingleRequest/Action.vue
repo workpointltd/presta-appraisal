@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import ModalRequest from "@components/ModalRequest.vue";
 import { ref } from "vue";
-
 const isOpen = ref(false);
 
 const modalDetails = ref({
@@ -17,7 +16,7 @@ function onClick(status: string, id: string) {
 </script>
 
 <template>
-  <section class="my-5">
+  <section class="mt-5">
     <div class="flex justify-between rounded bg-white px-6 py-9">
       <div class="space-y-2">
         <h1 class="text-xl text-dark-shade-01">Action Required</h1>

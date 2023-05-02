@@ -20,8 +20,10 @@ export default {
         "blue-shade-01": "#3C7AB7",
         "dark-tint-01": "#28637F",
         "dark-tint-02": "#489DC5",
+        "dark-tint-03": "#4D99D4",
 
         "green-dark": "#43A047",
+        "green-dark-02":"#1ABC9C",
         "green-light": "#DFFFEF",
         "red-dark": "#D90000",
         "red-light": "#FFE6E6",

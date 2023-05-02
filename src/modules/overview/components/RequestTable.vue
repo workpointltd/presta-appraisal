@@ -6,17 +6,33 @@ import {
   XMarkIcon,
   EyeIcon,
 } from "@heroicons/vue/24/outline";
-import { TableEntry } from "@/types";
 import Table from "@components/Table.vue";
+import Pagination from "@components/Pagination.vue";
+import { RequestData } from "@/modules/requests/types";
+import { onMounted, ref } from "vue";
+import router from "@/router";
+import ModalRequest from "@components/ModalRequest.vue";
 
 const props = defineProps<{
   tableData: {
     title: string;
     desc: string;
     method: string;
-    data: TableEntry[];
+    data: RequestData[] | null;
   };
 }>();
+
+const isOpen = ref<boolean>(false);
+const modalDetails = ref({
+  status: "",
+  id: "",
+});
+
+function onClick(status: string, id: string) {
+  modalDetails.value.status = status;
+  modalDetails.value.id = id;
+  isOpen.value = true;
+}
 
 const thead = [
   "Request ID",
@@ -81,9 +97,13 @@ const thead = [
         id="table"
         class="py-2"
       >
-        <Table :thead="thead">
+        <Table
+          :thead="thead"
+          v-if="tableData.data"
+        >
           <tr
-            class="border-b border-b-light-gray-03"
+            @click="router.push(`requests/${item.requestID}`)"
+            class="border-b border-b-light-gray-03 hover:cursor-pointer hover:bg-gray-50"
             v-for="(item, idx) in tableData.data"
             :key="idx"
           >
@@ -111,15 +131,23 @@ const thead = [
               v-if="tableData.method === 'Actions'"
             >
               <button
+                @click="e => e.stopPropagation()"
                 class="rounded border border-light-gray-03 p-1 text-green-dark hover:bg-gray-50"
               >
-                <CheckIcon class="h-3 w-3" />
+                <CheckIcon
+                  class="h-3 w-3"
+                  @click="onClick('Approve', item.requestID)"
+                />
               </button>
 
               <button
+                @click="e => e.stopPropagation()"
                 class="rounded border border-light-gray-03 p-1 text-red-dark hover:bg-gray-50"
               >
-                <XMarkIcon class="h-3 w-3" />
+                <XMarkIcon
+                  class="h-3 w-3"
+                  @click="onClick('Decline', item.requestID)"
+                />
               </button>
 
               <button
@@ -133,10 +161,12 @@ const thead = [
               v-if="tableData.method === 'Status'"
             >
               <span
-                class="rounded px-3 py-1 text-2xs"
+                class="rounded px-3 py-1 text-2xs capitalize"
                 :class="{
-                  'bg-green-light text-green-dark': item.status === 'Approved',
-                  'bg-red-light text-red-dark': item.status === 'Declined',
+                  'bg-green-light text-green-dark':
+                    item.status.toLowerCase() === 'approved',
+                  'bg-red-light text-red-dark':
+                    item.status.toLowerCase() === 'declined',
                 }"
                 >{{ item.status }}</span
               >
@@ -149,26 +179,12 @@ const thead = [
           </tr>
         </Table>
       </div>
-      <div class="flex justify-between text-xs text-light-gray-05">
-        <div class="flex items-center space-x-4">
-          <span class="flex items-center font-bold">
-            Show
-            <CustomBtn class="mx-2"
-              ><span>05</span><ChevronDownIcon class="h-5 w-5" />
-            </CustomBtn>
-            Entries
-          </span>
-          <span>Showing 1 to 5 of 20 entries</span>
-        </div>
-        <div class="flex space-x-1">
-          <button class="rounded border-0 bg-dark-gray-06 px-2 py-1 text-xs">
-            Previous
-          </button>
-          <button class="rounded border-0 bg-dark-gray-06 px-2 py-1 text-xs">
-            Next
-          </button>
-        </div>
-      </div>
+      <Pagination />
     </div>
   </section>
+  <ModalRequest
+    @modal-status="status => (isOpen = status)"
+    :isOpen="isOpen"
+    :modalDetails="modalDetails"
+  />
 </template>

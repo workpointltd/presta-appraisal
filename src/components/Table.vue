@@ -1,20 +1,11 @@
 <script setup lang="ts">
-import CustomBtn from "@/modules/overview/components/CustomBtn.vue";
-import {
-  ChevronDownIcon,
-  CheckIcon,
-  XMarkIcon,
-  EyeIcon,
-} from "@heroicons/vue/24/outline";
-import { TableEntry } from "@/types";
-
 defineProps<{
   thead: string[];
 }>();
 </script>
 
 <template>
-  <table class="w-full text-dark-shade-01">
+  <table class="w-full table-fixed border-spacing-x-4 text-dark-shade-01">
     <thead class="border-b border-b-dark-gray-05 text-left text-xs font-bold">
       <tr>
         <th

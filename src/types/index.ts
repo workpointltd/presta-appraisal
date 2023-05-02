@@ -1,9 +1,5 @@
-export type TableEntry = {
-  requestID: string;
-  dateTime: { date: string; time: string };
-  requestType: string;
-  description: { product: string; amount: string };
-  step: string;
-  applicant: { name: string; phoneNumber: string };
-  status?: string;
+export type Params = {
+  page: number;
+  limit: number;
+  status: string[];
 };

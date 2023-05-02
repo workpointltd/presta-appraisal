@@ -27,10 +27,10 @@ const navItems = [
     ],
   },
   {
-    title: "Settings",
+    title: "settings",
     links: [
       {
-        name: "Appraisal Settings",
+        name: "Appraisal settings",
         href: "#",
       },
       {

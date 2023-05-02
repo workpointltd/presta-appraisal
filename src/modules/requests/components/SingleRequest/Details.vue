@@ -1,4 +1,10 @@
 <script setup lang="ts">
+import { useRequests } from "@/modules/requests/composables/useRequests";
+import { useRoute } from "vue-router";
+
+const { request, fetchRequest } = useRequests();
+const slug = useRoute().params.slug;
+
 const appDetails = [
   { name: "Name", value: "First & Last Name" },
   { name: "Contact", value: "254 701 234 567" },

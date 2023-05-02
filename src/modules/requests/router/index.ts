@@ -1,6 +1,6 @@
 const requestsRouter = [
   {
-    path: "/requests",
+    path: "/requests/:slug",
     name: "Requests",
     component: () => import("../views/SingleRequest.vue"),
   },

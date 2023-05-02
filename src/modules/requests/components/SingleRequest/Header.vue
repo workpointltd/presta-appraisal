@@ -1,26 +1,38 @@
 <script setup lang="ts">
 import TopCard from "@/modules/requests/components/TopCard.vue";
-import CustomBtn from "@/modules/overview/components/CustomBtn.vue";
+import { useRequests } from "@/modules/requests/composables/useRequests";
+import { useRoute } from "vue-router";
+import { onBeforeMount, ref } from "vue";
 
-//temporary, for css only
-const status = "Pending Approval";
-const cardData = [
-  {
-    title: "New Loan Request",
-    value: { name: "3,500 KES", color: "text-green-dark" },
-    info: "Product: Okoa, Term: 1 Month",
-  },
-  {
-    title: "Action Required",
-    value: { name: "Approver Level 1" },
-    info: "Next Step: Approver Level 2",
-  },
-  {
-    title: "Initiator Details",
-    value: { name: "Initiator Name" },
-    info: "Request Date: DD/MM/YYYY",
-  },
-];
+const { request, fetchRequest } = useRequests();
+const slug = useRoute().params.slug;
+const cardData = ref();
+const status = ref<string | null>(null);
+
+onBeforeMount(async () => {
+  if (typeof slug === "string") await fetchRequest(slug);
+  cardData.value = [
+    {
+      title: request.value!.requestType,
+      value: {
+        name: request.value!.description.amount,
+        color: "text-green-dark",
+      },
+      info: "Product: Okoa, Term: 1 Month",
+    },
+    {
+      title: "Action Required",
+      value: { name: request.value!.step },
+      info: "Next Step: Approver Level 2",
+    },
+    {
+      title: "Initiator Details",
+      value: { name: request.value!.applicant.name },
+      info: "Request Date: " + request.value!.dateTime.date,
+    },
+  ];
+  status.value = request.value!.status;
+});
 </script>
 
 <template>
@@ -35,11 +47,11 @@ const cardData = [
       <div class="flex h-full space-x-4 text-dark-shade-01">
         <button class="btn">Go Back</button>
         <button
-          class="btn text-white"
+          class="btn capitalize text-white"
           :class="{
-            'bg-green-dark': status === 'Approved',
-            'bg-red-dark': status === 'Declined',
-            'bg-warning-medium': status === 'Pending Approval',
+            'bg-green-dark': status === 'approved',
+            'bg-warning-medium': status === 'pending',
+            'bg-red-dark': status === 'denied',
           }"
         >
           {{ status }}
